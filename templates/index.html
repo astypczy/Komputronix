@@ -8,16 +8,14 @@
     {% for product in products %}
     <div class="col-md-4">
       <div class="card mb-4 box-shadow">
-        <!-- <img class="card-img-top" src="{{ url_for('static', filename='img/' + product.photo) }}" alt="{{ product.name }}"> -->
-        <a href="{{ url_for('product', product_id=product.product_id) }}"><img
-            src="{{ url_for('serve_image', filename=product.photo) }}" alt="{{ product.photo }}">
+        <a href="{{ url_for('product', product_id=product.product_id) }}">
+          <img src="{{ url_for('static', filename='images/' + product.photo) }}" alt="{{ product.photo }}">
           <div class="card-body">
-
             <h5 class="card-title">{{ product.name }}</h5>
             <p class="card-text">{{ product.description }}</p>
             <div class="d-flex justify-content-between align-items-center">
               <div class="btn-group">
-                <form action="{{url_for('add_to_cart', id=product.product_id)}}" method="POST">
+                <form action="{{ url_for('add_to_cart', id=product.product_id) }}" method="POST">
                   <input type="hidden" name="product_id" value="{{ product.id }}">
                   <button type="submit" class="btn btn-primary">Dodaj do koszyka</button>
                 </form>
@@ -25,6 +23,7 @@
               <small class="text-muted">{{ product.price }} zł</small>
             </div>
           </div>
+        </a>
       </div>
     </div>
     {% endfor %}
