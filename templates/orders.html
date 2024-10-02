@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% if current_user.is_authenticated %}
+    <h1>Zamówienia</h1>
+    <form action="/sort" method="post">
+        <label for="sort_by">Sortuj rosnąco wg:</label>
+        <select name="sort_by" id="sort_by">
+            <option value="order_id">ID</option>
+            <option value="date">data</option>
+        </select>
+        <input type="submit" value="Sortuj">
+    </form>
+    <table class="table">
+    <thead class="thead-light">
+        <tr>
+            <th>ID</th>
+            <th>Data</th>
+            <th>Status</th>
+            <th>Akcje</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% set ns = namespace(prev=0) %}
+        {% set ns.tmp = -1 %}
+        {% for order in orders %}
+        {% if order[0] != ns.tmp %}
+        {{tmp}}
+        <tr>
+            <td>{{ order[0] }}</td>
+            <td>{{ order[2] }}</td>
+            <td>{{ order[4] }}</td>
+            <td>
+                <a href="{{ url_for('edit_order', order_id=order[0]) }}">Szczegóły</a>
+                <a href="{{ url_for('delete_order', order_id=order[0]) }}">Usuń</a>
+            </td>
+        </tr>
+        {% endif %}
+        {% set ns.tmp = order[0] %}
+        {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+<div class="container">
+    <h1>Nie jesteś zalogowany!</h1>
+
+    <a href="{{ url_for('login') }}" class="btn btn-primary">Przejdź do logowania</a>
+
+</div>
+{% endif %}
+{% endblock %}

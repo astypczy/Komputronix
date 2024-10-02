@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="container">
+    <h1>Produkt niedostępny</h1>
+    <p>Niestety, następujące produkty nie są dostępne w żądanej przez Ciebie ilości:</p>
+    <ul>
+      {% for p in products %}
+          <li>{{ p['name']  }} (dostępne {{ p['avaible'] }} szt.)</li>  
+      {% endfor %}
+    </ul>
+    <p>Zmodyfikuj koszyk i złóż zamówienie ponownie.</p>
+  </div>
+{% endblock %}
+

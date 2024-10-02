@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% if current_user.is_authenticated %}
+<h1>Informacje o kliencie</h1>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <h3>Dane osobowe:</h3>
+            <p><strong>ID:</strong> {{ client['id'] }}</p>
+            <p><strong>Imię i nazwisko:</strong> {{ client['name'] }} {{ client['surname'] }}</p>
+        </div>
+        <div class="col-md-6">
+            <h3>Dane kontaktowe:</h3>
+            <p><strong>Adres:</strong> {{ client['address'] }}</p>
+            <p><strong>Numer telefonu:</strong> {{ client['phone'] }}</p>
+            <p><strong>Adres email:</strong> {{ client['mail'] }}</p>
+        </div>
+    </div>
+</div>
+{% else %}
+<div class="container">
+    <h1>Nie jesteś zalogowany!</h1>
+
+    <a href="{{ url_for('login') }}" class="btn btn-primary">Przejdź do logowania</a>
+
+</div>
+{% endif %}
+
+{% endblock %}

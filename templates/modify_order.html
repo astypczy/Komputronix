@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% if current_user.is_authenticated %}
+<h1>Modyfikuj zamówienie</h1>
+
+
+<div class="form-group">
+  Klient: <a href="{{ url_for('client', client_id=client_id) }}">{{ name }}</a> <br>
+  <label for="products">Zamówione produkty:</label>
+  <ul>
+    {% for product in products %}
+    <li>{{ product['name'] }} ({{ product['amount'] }} szt.) <td>
+        {% if len_products > 1 %}selected<form method="POST" action="{{ url_for('remove_from_order') }}">
+          <input type="hidden" name="product_id" value="{{ product['id'] }}">
+          <input type="hidden" name="order_id" value="{{ order[0] }}">
+          <button type="submit" class="btn btn-danger">Usuń</button>
+        </form>{% endif %}
+        </form>
+
+
+
+
+      </td>
+    </li>
+    {% endfor %}
+  </ul>
+  Wartość zamówienia: {{ value }} zł
+</div>
+<form action="{{ url_for('edit_order', order_id= order[0]) }}" method="POST">
+  <input type="hidden" name="order_id" value="{{ order[0] }}">
+  Adres dostawy:
+  <div class="container">
+    <div class="form-group row">
+      <label for="inputStreet" class="col-sm-2 col-form-label">Ulica:</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="inputStreet" name="street" placeholder="{{ delivery_address[1] }}"
+          value="{{ delivery_address[1] }}" required>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="inputHouseNumber" class="col-sm-2 col-form-label">Nr domu:</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="inputHouseNumber" name="house_number"
+          placeholder="{{ delivery_address[4] }}" value="{{ delivery_address[4] }}" required>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="inputFlatNumber" class="col-sm-2 col-form-label">Nr mieszkania:</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="inputFlatNumber" name="flat_number"
+          placeholder="{{ delivery_address[5] }}" value="{{ delivery_address[5] }}">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="inputLocality" class="col-sm-2 col-form-label">Miejscowość:</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="inputLocality" name="locality"
+          placeholder="{{ delivery_address[2] }}" value="{{ delivery_address[2] }}" required>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="inputPostalCode" class="col-sm-2 col-form-label">Kod pocztowy:</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="inputPostalCode" name="postal_code"
+          placeholder="{{ delivery_address[3] }}" value="{{ delivery_address[3] }}" required>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="form-group">
+    <label for="status">Status:</label>
+    <select class="form-control" id="status" name="status">
+      <option value="Oczekuje" {% if order[4]=="Oczekuje" %}selected{% endif %}>Oczekuje</option>
+      <option value="W trakcie realizacji" {% if order[4]=="W trakcie realizacji" %}selected{% endif %}>W trakcie
+        realizacji</option>
+      <option value="Wysłane" {% if order[4]=="Wysłane" %}selected{% endif %}>Wysłane</option>
+    </select>
+  </div>
+
+  <button type="submit" class="btn btn-primary">Aktualizuj</button> <button action="{{ url_for('orders') }}"
+    class="btn btn-primary">Wróć do zamówień</button>
+</form>
+
+{% else %}
+<div class="container">
+  <h1>Nie jesteś zalogowany!</h1>
+
+  <a href="{{ url_for('login') }}" class="btn btn-primary">Przejdź do logowania</a>
+
+</div>
+{% endif %}
+
+{% endblock %}

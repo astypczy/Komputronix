@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+  <h1>Produkty</h1>
+
+  <form method="GET" action="{{ url_for('products') }}">
+    <div class="row">
+      <div class="col-sm-4">
+        <label for="limit">Wyświetlaj na stronie:</label>
+        <select name="limit" class="form-select" onchange="this.form.submit()">
+          {% set limits = [1,5,10,20] %}
+          {% for l in limits %}
+          <option value="{{ l }}" {% if limit==l %} selected {% endif %}>{{ l }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="col-sm-4">
+        <label for="sort">Sortuj po:</label>
+        <select name="sort" class="form-select" onchange="this.form.submit()">
+          {% set sort_options = {'name ASC': 'nazwie rosnąco', 'name DESC': 'nazwie malejąco','price ASC': 'cenie
+          rosnąco', 'price DESC' : 'cenie malejąco'} %}
+
+          {% for k, v in sort_options.items() %}
+          <option value="{{ k }}" {% if sort==k %} selected {% endif %}>{{ v }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="col-sm-4">
+        <label for="category">Kategoria:</label>
+        <select name="category" class="form-select" onchange="this.form.submit()">
+          <option value="" {% if category=='' %} selected {% endif %}>Wszystkie</option>
+          {% for c in categories %}
+          <option value="{{ c.category }}" {% if category==c.category %} selected {% endif %}>{{ c.category }}</option>
+          {% endfor %}
+        </select>
+      </div>
+    </div>
+
+  </form>
+  
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Nazwa</th>
+        <th>Kategoria</th>
+        <th>Cena</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for product in products %}
+      <tr>
+        <td><a href="{{ url_for('product', product_id=product.product_id) }}">{{ product.name }}</a></td>
+        <td>{{ product.category }}</td>
+        <td>{{ product.price }} PLN</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  {% if page < pages and page> 1%}
+    <nav aria-label="Product navigation">
+      <ul class="pagination justify-content-center">
+        <li class="page-item"><a class="page-link"
+            href="{{ url_for('products', page=page-1, limit=limit, sort=sort, category=category) }}">Poprzednia
+            strona</a></li>
+        <li class="page-item"><a class="page-link"
+            href="{{ url_for('products', page=page+1, limit=limit, sort=sort, category=category) }}">Następna strona</a>
+        </li>
+      </ul>
+    </nav>
+    {% endif %}
+    {% if page < pages and page==1%} <nav aria-label="Product navigation">
+      <ul class="pagination justify-content-center">
+        <li class="page-item"><a class="page-link"
+            href="{{ url_for('products', page=page+1, limit=limit, sort=sort, category=category) }}">Następna strona</a>
+        </li>
+      </ul>
+      </nav>
+      {% endif %}
+      {% if page == pages and page > 1%}
+      <nav aria-label="Product navigation">
+        <ul class="pagination justify-content-center">
+          <li class="page-item"><a class="page-link"
+              href="{{ url_for('products', page=page-1, limit=limit, sort=sort, category=category) }}">Poprzednia
+              strona</a></li>
+        </ul>
+      </nav>
+      {% endif %}
+</div>
+{% endblock %}

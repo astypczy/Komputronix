@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <script>
+      function show_delivery_address() {
+  var select = document.getElementById("delivery");
+  var div = document.getElementById("delivery_address");
+  
+  if (select.value == "yes") {
+    div.style.display = "none";
+  } else {
+    div.style.display = "block";
+  }
+}
+    </script>
+    
+  <div class="container mt-5">
+    <form action="{{ url_for('order', order_id=order_id) }}" method="POST">
+      <h2 class="mb-4">Dane do zamówienia</h2>
+      <div class="form-group row">
+        <label for="inputName" class="col-sm-2 col-form-label">Imię:</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="inputName" name="name" required>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="inputSurname" class="col-sm-2 col-form-label">Nazwisko:</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="inputSurname" name="surname" required>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="inputEmail" class="col-sm-2 col-form-label">Email:</label>
+        <div class="col-sm-10">
+          <input type="email" class="form-control" id="inputEmail" name="email" required>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="inputPhone" class="col-sm-2 col-form-label">Nr telefonu:</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="inputPhone" name="phone" required>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="inputStreet" class="col-sm-2 col-form-label">Ulica:</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="inputStreet" name="street" required>
+        </div>
+      </div>
+       <div class="form-group row">
+        <label for="inputHouseNumber" class="col-sm-2 col-form-label">Nr domu:</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="inputHouseNumber" name="house_number" required>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="inputFlatNumber" class="col-sm-2 col-form-label">Nr mieszkania:</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="inputFlatNumber" name="flat_number">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="inputLocality" class="col-sm-2 col-form-label">Miejscowość:</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="inputLocality" name="locality" required>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="inputPostalCode" class="col-sm-2 col-form-label">Kod pocztowy:</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="inputPostalCode" name="postal_code" required>
+        </div>
+      </div>
+      <div  class="form-group row">
+      <label for="inputDeliveryMethod" class="col-sm-2 col-form-label">Adres dostawy:</label>
+      <select id="delivery" name="delivery" onchange="show_delivery_address()">
+  <option value="yes">Dostawa na adres zamieszkania</option>
+  <option value="no">Dostawa na inny adres (podaj poniżej)</option>
+</select>
+</div>    
+    <div id="delivery_address" style="display: none;">
+    <div class="form-group row">
+        <label for="inputStreetD" class="col-sm-2 col-form-label">Ulica:</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="inputStreetD" name="streetD">
+        </div>
+      </div>
+       <div class="form-group row">
+        <label for="inputHouseNumberD" class="col-sm-2 col-form-label">Nr domu:</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="inputHouseNumberD" name="house_numberD">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="inputFlatNumberD" class="col-sm-2 col-form-label">Nr mieszkania:</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="inputFlatNumberD" name="flat_numberD">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="inputLocalityD" class="col-sm-2 col-form-label">Miejscowość:</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="inputLocalitDy" name="localityD">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="inputPostalCodeD" class="col-sm-2 col-form-label">Kod pocztowy:</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="inputPostalCodeD" name="postal_codeD">
+        </div>
+    </div>
+    </div>
+
+      <button type="submit" class="btn btn-primary">Złóż zamówienie</button>
+    </form>
+  </div>
+{% endblock %}
+

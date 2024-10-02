@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="container">
+    <h1>Potwierdzenie zamówienia</h1>
+    <p>Dziękujemy za zakupy w naszym sklepie!</p>
+    <p>Szczegóły zamówienia:</p>
+    <ul>
+      <li>Numer zamówienia: {{ order[0] }}</li>
+      <li>Data zamówienia {{ order[2] }}</li>
+      <li>Adres dostawy: {{ delivery_address }}</li>
+      <li>Wartość zamówienia: {{ session['total'] }} zł</li>
+    </ul>
+    <a href="{{ url_for('cart') }}" class="btn btn-primary">Powrót do koszyka</a>
+    <a href="{{ url_for('index') }}" class="btn btn-success">Powrót</a>
+  </div>
+{% endblock %}
+

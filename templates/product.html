@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container my-5">
+  <div class="row">
+    <div class="col-md-4">
+      <img src="{{ product.image }}" class="img-fluid" alt=""> <br />
+      <!-- <img src="{{ product.photo }}" class="img-fluid" alt="{{ product.photo }}"> -->
+      <img src="{{ url_for('serve_image', filename=product.photo) }}" alt="{{ product.photo }}">
+
+    </div>
+    <div class="col-md-8">
+      <h1>{{ product.name }}</h1>
+      <p class="text-muted">{{ product.category }}</p>
+      <p class="lead">{{ product.price }} zł</p>
+      <form action="{{url_for('add_to_cart', id=product.product_id)}}" method="POST">
+        <div class="form-group">
+          <input type="hidden" name="product_id" value="{{ product.id }}">
+          <label for="quantity">Liczba zamawianych sztuk</label>
+          <input type="number" class="form-control" name="quantity" id="quantity" value="1" min="1"
+            max="{{ product.amount }}">
+          <p class="lead">Dostępnych: {{ product.amount }} szt.</p>
+          <button type="submit" class="btn btn-primary">Dodaj do koszyka</button>
+        </div>
+      </form>
+      {% if current_user.is_authenticated %}
+      <div class="form-group">
+      <a href="{{ url_for('edit_product', product_id=product.product_id) }}" class="btn btn-primary">Edytuj</a>
+    </div>
+    <form action="{{url_for('delete_product', product_id=product.product_id)}}" method="POST">
+      <div class="form-group">
+        <input type="hidden" name="product_id" value="{{ product.id }}">
+        <button type="submit" class="btn btn-danger">Usuń produkt</button>
+      </div>
+    </form> {% endif %}
+
+  </div>
+</div>
+<hr>
+<div class="row">
+  <div class="col-md-12">
+    <h4>Producent</h4>
+    <p>{{ product.producent }}</p>
+    <h4>Opis produktu</h4>
+    <p>{{ product.description }}</p>
+  </div>
+</div>
+</div>
+{% endblock %}

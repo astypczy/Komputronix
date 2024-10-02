@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+        .text-right {
+            text-align: right;
+        }
+
+        .button2 {
+            background-color: #556061;
+            /* Kolor tła */
+            border: none;
+            /* Brak obramowania */
+            color: white;
+            /* Kolor tekstu */
+            padding: 10px 20px;
+            /* Wielkość wypełnienia wewnątrz przycisku */
+            text-align: center;
+            /* Wyśrodkowanie tekstu */
+            text-decoration: none;
+            /* Brak podkreślenia */
+            display: inline-block;
+            /* Właściwość wyświetlania */
+            font-size: 16px;
+            /* Rozmiar czcionki */
+            cursor: pointer;
+            /* Kursor zmienia się na wskaźnik */
+            border-radius: 4px;
+            /* Zaokrąglenie rogów */
+            transition-duration: 0.4s;
+            /* Czas trwania animacji */
+        }
+
+        .button2:hover {
+            background-color: #45a049;
+            /* Kolor tła po najechaniu */
+        }
+
+        .logout {
+            margin-left: 20px;
+            /* Dodaj dowolną wartość marginesu, która Ci odpowiada */
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="{{ url_for('index') }}">Komputronix</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="{{ url_for('index') }}">Strona główna</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('products') }}">Produkty</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('cart') }}">Koszyk</a>
+                </li>
+
+            </ul>
+
+            <ul class="navbar-nav ml-auto">
+                {% if current_user.is_authenticated %}
+                <li><a href="{{ url_for('welcome', username=current_user.id) }}"> Zarządzaj bazą danych </a></li>
+                <li class="logout"><a href="{{ url_for('logout') }}">Logout</a></li>
+                {% else %}
+                <li><a href="{{ url_for('login') }}">Login</a></li>
+                {% endif %}
+            </ul>
+
+        </div>
+    </nav>
+
+
+    <!-- Page content -->
+    <div class="container-fluid mt-3">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+    <!-- jQuery, Popper.js, and Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/esm/popper.min.js"
+        integrity="sha256-zrK/WrHJYn/VnTZIDcMIZw2Dyj/O0Om+c8u+LeEg/Po=" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

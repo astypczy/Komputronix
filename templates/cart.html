@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div class="container">
+    <h1>Twój koszyk</h1>
+    {% if session['cart'] %}
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Nazwa produktu</th>
+            <th>Cena za sztukę</th>
+            <th>Liczba</th>
+            <th>Całkowita cena</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+         {% set total = 0 %}
+
+          {% for item in session['cart'] %}
+            <tr>
+              <td>{{ item['name'] }}</td>
+              <td>{{ item['price'] }}</td>
+              <td>{{ item['quantity'] }}</td>
+              <td>{{ item['subtotal'] }}</td>
+               <td><form method="POST" action="{{ url_for('remove_from_cart', id=item['id']) }}">
+      <input type="hidden" name="id" value="{{ item['id'] }}">
+      <button type="submit" class="btn btn-danger">Usuń</button></td>
+    </form>
+            </tr>
+          {% endfor %}
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="3" class="text-right">Razem:</td>
+            <td>{{ session['total'] }}</td>
+            <td></td>
+          </tr>
+        </tfoot>
+      </table>
+      <a href="{{ url_for('order') }}" class="btn btn-success">Złóż zamówienie</a>
+      <a href="{{ url_for('products') }}" class="btn btn-primary">Kontynuuj zakupy</a>
+      
+    {% else %}
+      <p>Twój koszyk jest pusty</p>
+    {% endif %}
+  </div>
+{% endblock %}
+

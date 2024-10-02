@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% if current_user.is_authenticated %}
+     <h2>Najlepiej sprzedające się produkty wg ilości</h2>
+    <table class="table">
+        <tr>
+            <th>Nazwa produktu</th>
+            <th>Liczba sprzedanych sztuk</th>
+        </tr>
+        {% for product in bestselling_quantity %}
+            <tr>
+                <td>{{ product.name }}</td>
+                <td>{{ product.quantity }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+
+    <h2>Najlepiej sprzedające się produkty wg wartości</h2>
+    <table class="table">
+        <tr>
+            <th>Nazwa produktu</th>
+            <th>Wartość sprzedaży [zł]</th>
+        </tr>
+        {% for product in bestselling_value %}
+            <tr>
+                <td>{{ product.name }}</td>
+                <td>{{ product.value }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+
+    <h2>Najlepiej sprzedające się produkty w tym tygodniu wg ilości</h2>
+    <table class="table">
+        <tr>
+            <th>Nazwa produktu</th>
+            <th>Liczba sprzedanych sztuk</th>
+        </tr>
+        {% for product in bestselling_week %}
+            <tr>
+                <td>{{ product.name }}</td>
+                <td>{{ product.quantity }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+
+    <h2>Najlepiej sprzedające się produkty w tym tygodniu wg wartości</h2>
+    <table class="table">
+        <tr>
+            <th>Nazwa produktu</th>
+            <th>Wartość sprzedaży [zł]</th>
+        </tr>
+        {% for product in bestselling_week_value %}
+            <tr>
+                <td>{{ product.name }}</td>
+                <td>{{ product.value }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+    
+    <h2>Najgorzej sprzedające się produkty</h2>
+    <table class="table">
+        <tr>
+            <th>Nazwa produktu</th>
+            <th>Liczba sprzedanych sztuk</th>
+        </tr>
+        {% for product in worstselling %}
+            <tr>
+                <td>{{ product.name }}</td>
+                <td>{{ product.quantity }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+    {% else %}
+<div class="container">
+    <h1>Nie jesteś zalogowany!</h1>
+
+    <a href="{{ url_for('login') }}" class="btn btn-primary">Przejdź do logowania</a>
+
+</div>
+{% endif %}
+{% endblock %}

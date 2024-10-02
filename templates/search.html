@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Wyniki wyszukiwania dla: "{{ request.args.get('query') }}"</h1>
+    {% if products %}
+        <ul>
+            {% for product in products %}
+                <li><a href="{{ url_for('product', product_id=product['product_id']) }}">{{ product['name'] }}</a></li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Nie znaleziono produktów.</p>
+    {% endif %}
+{% endblock %}

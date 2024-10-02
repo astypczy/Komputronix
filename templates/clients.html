@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% if current_user.is_authenticated %}
+<h1>Klienci</h1>
+<table class="table">
+    <thead class="thead-light">
+        <tr>
+            <th>ID</th>
+            <th>Imię</th>
+            <th>Nazwisko</th>
+            <th>Nr telefonu</th>
+            <th>Adres e-mail</th>
+            <th>Akcje</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for client in clients %}
+        <tr>
+            <td>{{ client[0] }}</td>
+            <td>{{ client[5] }}</td>
+            <td>{{ client[6] }}</td>
+            <td>{{ client[3] }}</td>
+            <td>{{ client[4] }}</td>
+            <td>
+                <a href="{{ url_for('client', client_id=client[0]) }}">Szczegóły</a>
+                <a href="{{ url_for('delete_client', client_id=client[0]) }}">Usuń</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<div class="container">
+    <h1>Nie jesteś zalogowany!</h1>
+
+    <a href="{{ url_for('login') }}" class="btn btn-primary">Przejdź do logowania</a>
+
+</div>
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% if current_user.is_authenticated %}
+<div class="container">
+  <h2>Dodano produkty!</h2>
+  <a href="{{ url_for('add') }}" class="btn btn-primary">Dodaj więcej produktów</a>
+  <a href="{{ url_for('index') }}" class="btn btn-primary">Wyjdź do strony głównej</a>
+
+</div>
+{% else %}
+<div class="container">
+  <h1>Nie jesteś zalogowany!</h1>
+
+  <a href="{{ url_for('login') }}" class="btn btn-primary">Przejdź do logowania</a>
+
+</div>
+{% endif %}
+
+{% endblock %}
