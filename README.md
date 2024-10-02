@@ -1,5 +1,5 @@
 # Komputronix
-Wstęp
+## Wstęp
 Cel projektu
 
 Celem tego projektu było zaprojektowanie i wdrożenie bazy danych dla magazynu części zamiennych. Baza miała wspierać stronę internetową, umożliwiając pełne zarządzanie magazynem i zakupami zarówno dla klientów, jak i administratorów. Strona internetowa jest zaprojektowana w sposób przyjazny dla użytkownika, co pozwala korzystać z niej osobom bez specjalistycznej wiedzy programistycznej.
@@ -19,7 +19,7 @@ Strona umożliwia:
     Klientowi: przeglądanie produktów oraz składanie zamówień.
     Administratorowi: zarządzanie zamówieniami, klientami, produktami (CRUD) oraz przeglądanie statystyk sprzedaży.
 
-Wymagania funkcjonalne
+## Wymagania funkcjonalne
 
 Dla klienta:
 
@@ -32,7 +32,7 @@ Dla administratora:
     Zarządzanie produktami (CRUD).
     Przeglądanie statystyk sprzedaży.
 
-Wymagania niefunkcjonalne
+## Wymagania niefunkcjonalne
 
 Technologie użyte w projekcie:
 
@@ -41,7 +41,7 @@ Technologie użyte w projekcie:
     HTML/CSS: do tworzenia interfejsu użytkownika.
 
 Zabezpieczenia systemu obejmują: brak dostępu do edycji bazy danych przez klientów oraz haszowanie haseł za pomocą bcrypt.
-Projekt systemu
+## Projekt systemu
 Projekt bazy danych
 
 Model bazy danych opiera się na kluczach głównych i obcych, które definiują relacje między tabelami. Diagram encji oraz relacji został załączony w formie graficznej.
