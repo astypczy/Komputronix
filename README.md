@@ -3,7 +3,6 @@
 Cel projektu
 
 Celem tego projektu było zaprojektowanie i wdrożenie bazy danych dla magazynu części zamiennych. Baza miała wspierać stronę internetową, umożliwiając pełne zarządzanie magazynem i zakupami zarówno dla klientów, jak i administratorów. Strona internetowa jest zaprojektowana w sposób przyjazny dla użytkownika, co pozwala korzystać z niej osobom bez specjalistycznej wiedzy programistycznej.
-Zakres projektu
 
 Projekt obejmował:
 
@@ -12,8 +11,6 @@ Projekt obejmował:
     Przygotowanie strony WWW umożliwiającej pełne korzystanie z systemu.
 
 ## Analiza wymagań
-
-Opis działania i schemat logiczny systemu
 
 Strona umożliwia:
 
