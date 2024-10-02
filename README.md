@@ -11,7 +11,8 @@ Projekt obejmował:
     Implementację bazy danych w wybranym środowisku.
     Przygotowanie strony WWW umożliwiającej pełne korzystanie z systemu.
 
-Analiza wymagań
+## Analiza wymagań
+
 Opis działania i schemat logiczny systemu
 
 Strona umożliwia:
